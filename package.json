@@ -1,0 +1,26 @@
+{
+  "name": "flipbase-demo-ats",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "node_modules/.bin/webpack-dev-server"
+  },
+  "devDependencies": {
+    "babel-core": "^6.1.2",
+    "babel-loader": "^6.1.0",
+    "babel-preset-es2015": "^6.1.2",
+    "babel-preset-react": "^6.1.2",
+    "jscs": "^1.13.1",
+    "jscs-jsdoc": "^0.4.6",
+    "webpack": "^1.12.2",
+    "webpack-dev-server": "^1.12.1"
+  },
+  "jshintConfig": {
+    "laxcomma": true,
+    "laxbreak": true
+  },
+  "dependencies": {
+    "react": "^0.14.2",
+    "react-dom": "^0.14.2"
+  }
+}
