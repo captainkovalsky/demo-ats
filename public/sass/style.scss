@@ -1,0 +1,24 @@
+#app {
+
+}
+
+.page {
+  display: table;
+  min-height: 100%;
+  width: 100%;
+}
+
+.page-row {
+  display: table-row;
+}
+
+.dashboard-menu {
+  display: table-cell;
+  width: 200px;
+  background-color: #232322;
+  color: #FFF;
+}
+
+.content {
+  display: table-cell;
+}

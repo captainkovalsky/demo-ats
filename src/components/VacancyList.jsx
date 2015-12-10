@@ -1,25 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router'
-import ApplicationStore from './../stores/ApplicationStore';
+import VacancyStore from './../stores/VacancyStore';
 
-class ApplicationsList extends React.Component {
+class VancanciesList extends React.Component {
   
   constructor(props) {
     super(props);
-    this.state = { applications: ApplicationStore.getState() }
+    this.state = {vacancies: VacancyStore.getState()};
   }
 
   render() {
-    var list = this.state.applications.map(function (val) {
+    var list = this.state.vacancies.map(function (val) {
       return <div key={val._id}>
-        <div><Link to={`/app/applications/${val._id}`}>{val.candidate.first_name} {val.candidate.last_name} @ {val.vacancy.title}</Link></div>
+        <div><Link to={`/app/vacancies/${val._id}`}>{val.title}</Link></div>
       </div>;
     });
 
     return <div className="dashboard-list-row">
       <div className="3-colums">
         <div className="header">
-          <h3>Applications</h3>
+          <h3>Vacancies</h3>
         </div>
         <div>
           {list}
@@ -33,4 +33,4 @@ class ApplicationsList extends React.Component {
 
 }
 
-export default ApplicationsList;
+export default VancanciesList;

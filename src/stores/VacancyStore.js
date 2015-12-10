@@ -14,7 +14,7 @@ class VacancyStore extends Store {
   }
 
   getVacancy(id) {
-    return vacancies.find(vacancy => vacancy._id === id);
+    return vacancies.find(vacancy => vacancy._id === parseInt(id));
   }
 }
 

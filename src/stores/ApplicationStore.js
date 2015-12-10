@@ -19,6 +19,10 @@ class ApplicationStore extends Store {
     return applications;
   }
 
+  getApplication(id) {
+    return applications.find(application => application._id === parseInt(id));
+  }
+
 }
 
 ApplicationStore.dispatchToken = AppDispatcher.register(function(action) {

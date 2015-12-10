@@ -1,26 +1,32 @@
 import React from 'react';
-import candidates from './../fixtures/candidates';
+import CandidateStore from './../stores/CandidateStore';
+import { Link } from 'react-router'
 
 class CandidatesList extends React.Component {
   
   constructor(props) {
     super(props);
-    this.state = {candidates: candidates};
+    this.state = {candidates: CandidateStore.getState()};
   }
 
   render() {
-    var applications = this.state.candidates.map(function (val) {
+    var list = this.state.candidates.map(function (val) {
       return <div key={val._id}>
-        <div>{val.first_name} {val.last_name}</div>
+        <div><Link to={`/app/candidates/${val._id}`}>{val.first_name} {val.last_name}</Link></div>
       </div>;
     });
 
-    return <div className="3-colums">
-      <div className="header">
-        <h3>Candidates</h3>
+    return <div className="dashboard-list-row">
+      <div className="3-colums">
+        <div className="header">
+          <h3>Candidates</h3>
+        </div>
+        <div>
+          {list}
+        </div>
       </div>
-      <div>
-        {applications}
+      <div className="dashboard-item">
+        {this.props.children}
       </div>
     </div>
   }

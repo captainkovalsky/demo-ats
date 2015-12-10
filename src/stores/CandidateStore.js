@@ -14,7 +14,7 @@ class CandidateStore extends Store {
   }
 
   getCandidate(id) {
-    return candidates.find(candidate => candidate._id === id);
+    return candidates.find(candidate => candidate._id === parseInt(id));
   }
 }
 
