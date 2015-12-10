@@ -1,7 +1,7 @@
 import React from 'react';
 import candidates from './../fixtures/candidates';
 
-class Hello extends React.Component {
+class CandidatesList extends React.Component {
   
   constructor(props) {
     super(props);
@@ -9,24 +9,22 @@ class Hello extends React.Component {
   }
 
   render() {
-    var nodes = this.state.candidates.map(function (val) {
-      return <tr key={val._id}><td className="small-font">{val.name}</td></tr>;
+    var applications = this.state.candidates.map(function (val) {
+      return <div key={val._id}>
+        <div>{val.first_name} {val.last_name}</div>
+      </div>;
     });
 
-    return <div>
-        <table>
-          <thead>
-            <tr>
-              <th>Candidates</th>
-            </tr>
-          </thead>
-          <tbody>
-            {nodes}
-          </tbody>
-        </table>
+    return <div className="3-colums">
+      <div className="header">
+        <h3>Candidates</h3>
       </div>
+      <div>
+        {applications}
+      </div>
+    </div>
   }
 
 }
 
-export default Hello;
+export default CandidatesList;

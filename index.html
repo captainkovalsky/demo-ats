@@ -8,9 +8,50 @@
 
   <link rel="stylesheet" href="/bower_components/foundation/css/normalize.min.css" type="text/css" />
   <link rel="stylesheet" href="/bower_components/foundation/css/foundation.min.css" type="text/css" />
+  <style>
+    .page {
+      display: table;
+      min-height: 100%;
+      width: 100%;
+    }
+
+    .page-row {
+      display: table-row;
+    }
+
+    .menu {
+      display: table-cell;
+      width: 200px;
+      background-color: #232322;
+      color: #FFF;
+    }
+
+    .content {
+      display: table-cell;
+    }
+  </style>
 </head>
 <body>
-  <div id="content"></div>
+  <div class="page">
+    <div class="page-row">
+    
+      <!-- Navigation menu -->
+      <div class="menu">
+        <div class="header">
+          <ul>
+            <li><a href="#">Candidates</a></li>
+            <li><a href="/#/applications">Applications</a></li>
+            <li><a href="/#/vacancies">Vacancies</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="content">
+        <div id="content"></div>
+      </div>
+    </div>
+  </div>
   <script src="/bower_components/jquery/dist/jquery.min.js"></script>
   <script src="/bower_components/foundation/js/foundation.min.js"></script>
   <script src="/app.js"></script>
