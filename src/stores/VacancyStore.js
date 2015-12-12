@@ -1,8 +1,8 @@
 import Store from './Store';
 import AppDispatcher from './../dispatcher/AppDispatcher';
-import fixtures from './../fixtures/vacancies';
+import { ActionTypes } from './../constants/constants';
 
-var vacancies = fixtures;
+var vacancies = [];
 
 class VacancyStore extends Store {
   constructor() {
@@ -16,18 +16,25 @@ class VacancyStore extends Store {
   getVacancy(id) {
     return vacancies.find(vacancy => vacancy._id === parseInt(id));
   }
+
+  addAllVacancies(collection) {
+    vacancies = collection;
+  }
 }
 
-VacancyStore.dispatchToken = AppDispatcher.register(function(action) {
+let store = new VacancyStore();
+
+store.dispatchToken = AppDispatcher.register(function(action) {
 
   switch (action.type) {
 
-    case ActionTypes.CLICK_THREAD:
-      VacancyStore.emitChange();
+    case ActionTypes.ADD_ALL_VACANCIES:
+      store.addAllVacancies(action.vacancies);
+      store.emitChange();
       break;
 
     case ActionTypes.RECEIVE_RAW_MESSAGES:
-      VacancyStore.emitChange();
+      store.emitChange();
       break;
 
     default:
@@ -35,4 +42,4 @@ VacancyStore.dispatchToken = AppDispatcher.register(function(action) {
   }
 });
 
-export default new VacancyStore();
+export default store;

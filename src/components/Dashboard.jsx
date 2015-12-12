@@ -1,4 +1,5 @@
 import React from 'react';
+import ToggleButton from './ToggleButton';
 import { Link } from 'react-router'
 
 class Dashboard extends React.Component {
@@ -9,6 +10,8 @@ class Dashboard extends React.Component {
       <div className="page-row">
 
         <div className="dashboard-menu">
+          <ToggleButton route="jobs"/>
+
           <div className="header">
             <ul>
               <li><Link to="/app/applications">Applications</Link></li>
@@ -18,10 +21,8 @@ class Dashboard extends React.Component {
           </div>
         </div>
 
-        <div className="dashboard-list">
-          {this.props.children}
-        </div>
       </div>
+        {this.props.children}
     </div>
   }
 

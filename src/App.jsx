@@ -1,3 +1,4 @@
+import 'style.scss'
 import React from 'react';
 import { render } from 'react-dom';
 import Dashboard from './components/Dashboard.jsx';
@@ -7,8 +8,13 @@ import ApplicationItem from './components/ApplicationItem.jsx';
 import CandidateItem from './components/CandidateItem.jsx';
 import Vacancies from './components/VacancyList.jsx';
 import VacancyItem from './components/VacancyItem.jsx';
-import Jobsite from './components/Jobsite.jsx';
+import Jobs from './components/Jobs.jsx';
+import JobsItem from './components/JobsItem.jsx';
 import {Router, Route, Link} from 'react-router';
+
+import {fetchAllCandidates} from './utils/CandidateAPIUtils';
+import {fetchAllApplications} from './utils/ApplicationAPIUtils';
+import {fetchAllVacancies} from './utils/VacancyAPIUtils';
 
 render((<Router>
   <Route path="app" component={Dashboard}>
@@ -22,6 +28,11 @@ render((<Router>
       <Route path="/app/vacancies/:id" component={VacancyItem} />
     </Route>
   </Route>
-  <Route path="jobs" component={Jobsite} />
-
+  <Route path="jobs" component={Jobs} />
+  <Route path="/jobs/:id" component={JobsItem} />
 </Router>), document.getElementById('app'));
+
+// Fetch all fixture data
+fetchAllCandidates();
+fetchAllVacancies();
+fetchAllApplications();

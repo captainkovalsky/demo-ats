@@ -23,8 +23,13 @@ class CandidateItem extends React.Component {
   }
 
   render() {
+    var candidate = this.state.candidate;
     return <div>
-      <h3>{this.state.candidate.first_name}</h3>
+      <div className="cover">
+      <div className="modal">
+        <h3>{candidate.first_name} {candidate.last_name}</h3>
+      </div>
+      </div>
     </div>
   }
 

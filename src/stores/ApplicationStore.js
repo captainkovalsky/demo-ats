@@ -2,9 +2,9 @@ import Store from './Store';
 import AppDispatcher from './../dispatcher/AppDispatcher';
 import CandidateStore from  './CandidateStore';
 import VacancyStore from  './VacancyStore';
-import fixtures from './../fixtures/applications';
+import { ActionTypes } from './../constants/constants';
 
-var applications = fixtures;
+var applications = [];
 
 class ApplicationStore extends Store {
   constructor() {
@@ -23,9 +23,19 @@ class ApplicationStore extends Store {
     return applications.find(application => application._id === parseInt(id));
   }
 
+  addAllApplications(collection) {
+    applications = collection;
+  }
+
+  addApplication(application) {
+    applications.push(application);
+  }
+
 }
 
-ApplicationStore.dispatchToken = AppDispatcher.register(function(action) {
+let store = new ApplicationStore();
+
+store.dispatchToken = AppDispatcher.register(function(action) {
   AppDispatcher.waitFor([
     CandidateStore.dispatchToken,
     VacancyStore.dispatchToken
@@ -33,12 +43,14 @@ ApplicationStore.dispatchToken = AppDispatcher.register(function(action) {
 
   switch (action.type) {
 
-    case ActionTypes.CLICK_THREAD:
-      ApplicationStore.emitChange();
+    case ActionTypes.ADD_ALL_APPLICATIONS:
+      store.addAllApplications(action.applications);
+      store.emitChange();
       break;
 
-    case ActionTypes.RECEIVE_RAW_MESSAGES:
-      ApplicationStore.emitChange();
+    case ActionTypes.ADD_APPLICATION:
+      store.addApplication(action.application);
+      store.emitChange();
       break;
 
     default:
@@ -46,4 +58,4 @@ ApplicationStore.dispatchToken = AppDispatcher.register(function(action) {
   }
 });
 
-export default new ApplicationStore();
+export default store;

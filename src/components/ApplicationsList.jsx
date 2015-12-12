@@ -6,12 +6,24 @@ class ApplicationsList extends React.Component {
   
   constructor(props) {
     super(props);
+    this.onChange = this.onChange.bind(this);
+    ApplicationStore.addChangeListener(this.onChange);
     this.state = { applications: ApplicationStore.getState() }
+  }
+
+  onChange() {
+    this.setState({
+      applications: ApplicationStore.getState()
+    })
+  }
+
+  componentWillUnmount() {
+    ApplicationStore.removeChangeListener(this.onChange);
   }
 
   render() {
     var list = this.state.applications.map(function (val) {
-      return <div key={val._id}>
+      return <div key={`application_${val._id}`}>
         <div><Link to={`/app/applications/${val._id}`}>{val.candidate.first_name} {val.candidate.last_name} @ {val.vacancy.title}</Link></div>
       </div>;
     });

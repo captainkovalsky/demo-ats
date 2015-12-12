@@ -5,7 +5,7 @@ export default [
     candidate_id: 2,
     created_at: null,
     modified_at: null, 
-    status: '',
+    status: 'scheduled phone interview',
     video: null,
     resume: {},
   }

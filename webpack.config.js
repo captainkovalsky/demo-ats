@@ -22,7 +22,11 @@ module.exports = {
     // Let Webpack use bower components & node modules
     modulesDirectories: ['node_modules', 'bower_components'],
     // Let Webpack require files without extension
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx'],
+    // Let webpack inlcude sass
+    root: [
+      path.join(__dirname, '/public/sass')
+    ]
   },
 
   module: {
@@ -36,6 +40,7 @@ module.exports = {
           presets: ['react', 'es2015']
         }
       },
+
       {
         // Tell webpack to use jsx-loader + babel for all *.jsx files
         test: /\.js$/,
@@ -44,6 +49,11 @@ module.exports = {
         query: {
           presets: ['es2015']
         }
+      },
+
+      {
+        test: /\.scss$/,
+        loader: 'style!css!sass?outputStyle=expanded'
       }
     ]
   },
