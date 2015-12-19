@@ -7,15 +7,27 @@ import { Link } from 'react-router'
 class Jobs extends React.Component {
 
   constructor(props) {
+    console.log('init');
     super(props);
+
+    this.onChange = this.onChange.bind(this);
+    VacancyStore.addChangeListener(this.onChange);
     this.state = { vacancies: VacancyStore.getState() }
+  }
+
+  onChange() {
+    this.setState({
+      candidates: VacancyStore.getState()
+    })
+  }
+
+  componentWillUnmount() {
+    VacancyStore.removeChangeListener(this.onChange);
   }
 
   render() {
     // This format is required to insert unescaped HTML using React!
-    var summary = function (vacancy) {
-      return {__html: vacancy.description.substring(0, 300) + '... '};
-    }
+    var summary = (vacancy) => ({__html: vacancy.description.substring(0, 300) + '... '})
 
     var list = this.state.vacancies.map(function (val) {
       return <div key={val._id}>

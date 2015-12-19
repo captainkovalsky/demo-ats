@@ -10,7 +10,7 @@ class Dashboard extends React.Component {
       <div className="page-row">
 
         <div className="dashboard-menu">
-          <ToggleButton route="jobs"/>
+          <ToggleButton route=""/>
 
           <div className="header">
             <ul>

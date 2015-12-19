@@ -16,6 +16,15 @@ import {fetchAllCandidates} from './utils/CandidateAPIUtils';
 import {fetchAllApplications} from './utils/ApplicationAPIUtils';
 import {fetchAllVacancies} from './utils/VacancyAPIUtils';
 
+// localStorage.removeItem('candidates');
+// localStorage.removeItem('vacancies');
+// localStorage.removeItem('applications');
+
+// Fetch all fixture data
+fetchAllVacancies();
+fetchAllCandidates();
+fetchAllApplications();
+
 render((<Router>
   <Route path="app" component={Dashboard}>
     <Route path="/app/applications" component={Applications}>
@@ -28,11 +37,6 @@ render((<Router>
       <Route path="/app/vacancies/:id" component={VacancyItem} />
     </Route>
   </Route>
-  <Route path="jobs" component={Jobs} />
+  <Route path="/" component={Jobs} />
   <Route path="/jobs/:id" component={JobsItem} />
 </Router>), document.getElementById('app'));
-
-// Fetch all fixture data
-fetchAllCandidates();
-fetchAllVacancies();
-fetchAllApplications();

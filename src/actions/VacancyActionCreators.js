@@ -1,5 +1,6 @@
 import AppDispatcher from './../dispatcher/AppDispatcher';
 import { ActionTypes } from './../constants/constants';
+import { saveVacancy as storeVacancy } from './../utils/VacancyAPIUtils';
 
 export function receiveAllVacancies (vacancies) {
   AppDispatcher.dispatch({
@@ -7,3 +8,14 @@ export function receiveAllVacancies (vacancies) {
     vacancies: vacancies
   });
 };
+
+export function updateVacancy (data) {
+  AppDispatcher.dispatch({
+    type: ActionTypes.UPDATE_VACANCY,
+    vacancy: data
+  });
+}
+
+export function saveVacancy (id, data) {
+  storeVacancy(id, data);
+}

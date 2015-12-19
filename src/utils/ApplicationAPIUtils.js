@@ -3,11 +3,20 @@ import { receiveAllApplications, receiveApplication } from './../actions/Applica
 import { createCandidate } from './CandidateAPIUtils';
 
 export function fetchAllApplications () {
+  let applications = JSON.parse(localStorage.getItem('applications'));
+
   // Store fixture data
-  localStorage.setItem('applications', JSON.stringify(fixtures));
+  if (!applications)
+    localStorage.setItem('applications', JSON.stringify(fixtures));
+  
+  applications = applications || fixtures;
+
   // Callback
   receiveAllApplications(fixtures);
 }
+
+  let vacancies = JSON.parse(localStorage.getItem('vacancies'));
+
 
 export function createApplication(candidate, vacancyID) {
   // Create a new candidate and get the _id

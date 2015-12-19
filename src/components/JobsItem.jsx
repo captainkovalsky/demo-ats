@@ -8,7 +8,7 @@ class JobsItem extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { vacancy: null, candidate: null }
+    this.state = { vacancy: null, candidate: null, errors: {} }
   }
 
   // Used for initial rendering
@@ -32,19 +32,46 @@ class JobsItem extends React.Component {
   }
 
   componentWillUnmount() {
+    console.log(this.recorder);
     this.recorder.destroy();
   }
 
   _onSubmit(evt) {
     evt.preventDefault();
+    let errors = this.validate();
+
+    if (errors) {
+      return this.setState({
+        errors: errors
+      })
+    }
+
     addApplication({
       first_name: this.refs.first_name.value,
       last_name: this.refs.last_name.value,
-      email: this.refs.email.value
+      email: this.refs.email.value,
+      video: this.refs.video.value
     }, this.state.vacancy._id)
   }
 
+  validate() {
+    let errors = {};
+    let refs = this.refs;
+
+    if (refs && !refs.first_name.value)
+      errors['first_name'] = 'Please enter your first name'
+
+    if (refs && !refs.last_name.value)
+      errors['last_name'] = 'Please enter your last name'
+
+    if (refs && !refs.email.value)
+      errors['last_name'] = 'Please enter your last name'
+
+    return errors;
+  }
+
   render() {
+    var label = this.state.vacancy.videoDescription || 'Video';
     // This format is required to insert unescaped HTML using React!
     var content = function (vacancy) {
       return {__html: vacancy.description};
@@ -57,14 +84,26 @@ class JobsItem extends React.Component {
         {this.state.vacancy.created_at}
         <div dangerouslySetInnerHTML={content(this.state.vacancy)} />
         <div>
-          <form onSubmit={this._onSubmit.bind(this)}>
-            <input type="text" ref="first_name" placeholder="First name" />
-            <input type="text" ref="last_name" placeholder="Last name" />
-            <input type="text" ref="email" placeholder="E-mail" />
-            <label>Video</label>
-            <input type="flipbase" name="video"/>
-            <button type="sumbit" >Send</button>
-          </form>
+          <h3>Apply now</h3>
+          <hr/>
+          <div className="row">
+            <div className="large-6 columns">
+              <form onSubmit={this._onSubmit.bind(this)}>
+                <label>First name
+                  <input type="text" ref="first_name" placeholder="First name" />
+                  <span>{this.state.errors.first_name}</span>
+                </label>
+                <input type="text" ref="last_name" placeholder="Last name" />
+                <span>{this.state.errors.last_name}</span>
+                <input type="text" ref="email" placeholder="E-mail" />
+                <span>{this.state.errors.email}</span>
+                <h5>{label}</h5>
+                <input type="flipbase" name="video"/>
+                <span>{this.state.errors.video}</span>
+                <button type="sumbit" >Send</button>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>

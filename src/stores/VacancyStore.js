@@ -20,6 +20,10 @@ class VacancyStore extends Store {
   addAllVacancies(collection) {
     vacancies = collection;
   }
+
+  updateVacancy(data) {
+    Object.assign(this.getVacancy(data._id), data);
+  }
 }
 
 let store = new VacancyStore();
@@ -33,7 +37,8 @@ store.dispatchToken = AppDispatcher.register(function(action) {
       store.emitChange();
       break;
 
-    case ActionTypes.RECEIVE_RAW_MESSAGES:
+    case ActionTypes.UPDATE_VACANCY:
+      store.updateVacancy(action.vacancy);
       store.emitChange();
       break;
 

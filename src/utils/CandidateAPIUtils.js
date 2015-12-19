@@ -2,11 +2,18 @@ import fixtures from './../fixtures/candidates';
 import { receiveAllCandidates, receiveCandidate } from './../actions/CandidateActionCreators';
 
 export function fetchAllCandidates () {
+  let candidates = JSON.parse(localStorage.getItem('candidates'));
+
   // Store fixture data
-  localStorage.setItem('candidates', JSON.stringify(fixtures));
+  if (!candidates)
+    localStorage.setItem('candidates', JSON.stringify(fixtures));
+
+  candidates = candidates || fixtures;
+
   // Callback
-  receiveAllCandidates(fixtures);
+  receiveAllCandidates(candidates);
 }
+
 
 export function createCandidate (candidate) {
   let candidates = JSON.parse(localStorage.getItem('candidates'));
